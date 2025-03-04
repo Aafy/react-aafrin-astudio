@@ -2,11 +2,16 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { IUsersResponse, IUser } from "../models/IUsers";
 import Table from "./Table";
+import Pagination from "./Pagination";
 
 function Users() {
+  const [userCount, setUsersCount] = useState<number>(0);
   const [usersData, setUsersData] = useState<IUser[]>([]);
   const [filteredData, setFilteredData] = useState<IUser[]>([]);
-  const [selectedPageSize, setPageSize] = useState(5);
+  const [selectedPageSize, setPageSize] = useState<number>(5);
+  const [currentPage, setCurrentPage] = useState<number>(1); // Current page
+  const [skipCount, setSkipCount] = useState<number>(0);
+
   const headers = [
     { key: "firstName", label: "FIRST NAME" },
     { key: "lastName", label: "LAST NAME" },
@@ -44,6 +49,14 @@ function Users() {
 
   const handlePageSizeChange = (pageSize: number) => {
     setPageSize(pageSize);
+    setCurrentPage(1);
+    setSkipCount(0);
+  };
+
+  const handlePaginationClick = (selectedPageNumber: number) => {
+    setCurrentPage(selectedPageNumber);
+    const skipCalcValue = selectedPageSize * (selectedPageNumber - 1);
+    setSkipCount(skipCalcValue);
   };
 
   useEffect(() => {
@@ -65,21 +78,20 @@ function Users() {
         user.birthDate.toLowerCase().includes(searchStr)
     );
     setFilteredData(filteredResults);
-
-    return () => {
-      console.log("Cleaning");
-    };
   }, [searchKey]);
 
   useEffect(() => {
-    axios(`https://dummyjson.com/users?limit=${selectedPageSize}`)
+    axios(
+      `https://dummyjson.com/users?limit=${selectedPageSize}&skip=${skipCount}`
+    )
       .then((usersResposnse) => {
         const usersResponseData = usersResposnse.data as IUsersResponse;
+        setUsersCount(usersResponseData.total);
         setUsersData(usersResponseData.users);
         setFilteredData(usersResponseData.users);
       })
       .catch(console.log);
-  }, [selectedPageSize]);
+  }, [selectedPageSize, currentPage]);
   return (
     <>
       <Table
@@ -88,6 +100,13 @@ function Users() {
         keyMapper={keys}
         onSearchChange={handleSearch}
         onPageSizeChange={handlePageSizeChange}
+      />
+
+      <Pagination
+        usersPerPage={selectedPageSize}
+        totalUsers={userCount}
+        paginate={handlePaginationClick}
+        forcePageNumber={currentPage - 1}
       />
     </>
   );

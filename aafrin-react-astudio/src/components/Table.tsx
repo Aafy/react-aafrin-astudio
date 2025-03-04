@@ -1,16 +1,8 @@
 import { SetStateAction, useState } from "react";
 import { ILabelKeyPair } from "../models/ILabelKeyPair";
-import { IUser } from "../models/IUsers";
+import { TableProps } from "../models/ITableModel";
 
-interface Props {
-  headers: ILabelKeyPair[];
-  rowData: IUser[];
-  keyMapper: string[];
-  onSearchChange: (searchValue: string) => void;
-  onPageSizeChange: (pageSize: number) => void;
-}
-
-function Table(props: Props) {
+function Table(props: TableProps) {
   const pageSizeOptions = [5, 10, 20, 50];
 
   const [showInput, setInputVisiblity] = useState(false);
