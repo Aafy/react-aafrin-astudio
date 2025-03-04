@@ -1,5 +1,9 @@
 import "./App.css";
+import "./index.css";
+import "./assets/fonts/neutra-text-bold-5871e1605afa2.otf";
+import "./assets/fonts/neutra-text-tf-5871e0b0704ed.otf";
 import Users from "./components/Users";
+
 function App() {
   return (
     <>

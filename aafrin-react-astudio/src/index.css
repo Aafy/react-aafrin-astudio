@@ -1,4 +1,15 @@
+@font-face {
+  font-family: "NeutraBold";
+  src: local("neutra-text-bold-5871e1605afa2"),
+    url("./assets/fonts/neutra-text-bold-5871e1605afa2.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "NeutraText";
+  src: local("neutra-text-tf-5871e0b0704ed"),
+    url("./assets/fonts/neutra-text-tf-5871e0b0704ed.otf") format("truetype");
+}
+
 * {
   margin: 2px;
-  font-family: neutra, "sans-serif";
 }

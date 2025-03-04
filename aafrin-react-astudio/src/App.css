@@ -14,11 +14,13 @@ table {
 th {
   border: 4px solid #ebebeb;
   background-color: #c0e3e5;
+  font-family: "NeutraBold";
 }
 
 td {
   text-align: center;
   border: 4px solid #ebebeb;
+  font-family: "NeutraText";
 }
 
 tr:hover {

@@ -7,13 +7,7 @@
 3. Install Tailwind
 4. Pass Data as props
 5. Change Table as dumb component ///PENDING
-
-6. Use Redux Toolkit
-   No Data Found Template
-
-# Do not push
-
-Add interface
-use Tailwind
-redux toolkit
-Add loading if possible
+6. Add Pagination to Users Table
+7. Add Font Family
+8. Move interface to models
+9. Use Redux Toolkit
