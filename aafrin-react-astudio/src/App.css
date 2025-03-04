@@ -2,6 +2,7 @@
 
 input {
   outline: auto;
+  font-family: "NeutraText";
 }
 
 table {
@@ -39,12 +40,17 @@ tr:hover {
   stroke-width: 2px;
 }
 
+#pageSize {
+  font-family: "Neutrabold";
+}
+
 .pagination {
   display: flex;
   justify-content: center;
   padding-left: 0;
   list-style: none;
   margin-top: 20px;
+  font-family: "NeutraText";
 }
 
 .pagination li {
