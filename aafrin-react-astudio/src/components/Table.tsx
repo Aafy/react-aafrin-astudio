@@ -7,9 +7,12 @@ interface Props {
   rowData: IUser[];
   keyMapper: string[];
   onSearchChange: (searchValue: string) => void;
+  onPageSizeChange: (pageSize: number) => void;
 }
 
 function Table(props: Props) {
+  const pageSizeOptions = [5, 10, 20, 50];
+
   const [showInput, setInputVisiblity] = useState(false);
   const [searchKey, setSearchKey] = useState("");
 
@@ -25,8 +28,29 @@ function Table(props: Props) {
     props.onSearchChange("");
   };
 
+  const handlePageSizeChange = (event: {
+    target: { value: SetStateAction<string> };
+  }) => {
+    props.onPageSizeChange(Number(event.target.value));
+  };
+
   return (
     <>
+      {/*  Dropdown menu */}
+
+      <select name="pageSize" id="pageSize" onChange={handlePageSizeChange}>
+        {pageSizeOptions.map((pageSize: number) => (
+          <option
+            value={pageSize}
+            key={"Showing " + pageSize + "items"}
+            defaultValue="5"
+          >
+            {pageSize}
+          </option>
+        ))}
+      </select>
+
+      {/* Search Icon */}
       <svg
         onClick={handleSearchClick}
         className="svg-icon search-icon"
@@ -50,6 +74,7 @@ function Table(props: Props) {
           onChange={handleInputChange}
         />
       )}
+      {/* Table Implementation */}
       <table key="Resusable Table">
         <thead key="Table Header">
           <tr>

@@ -1,12 +1,12 @@
 import axios from "axios";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IUsersResponse, IUser } from "../models/IUsers";
 import Table from "./Table";
 
 function Users() {
   const [usersData, setUsersData] = useState<IUser[]>([]);
   const [filteredData, setFilteredData] = useState<IUser[]>([]);
-
+  const [selectedPageSize, setPageSize] = useState(5);
   const headers = [
     { key: "firstName", label: "FIRST NAME" },
     { key: "lastName", label: "LAST NAME" },
@@ -42,6 +42,10 @@ function Users() {
     setSearchKey(searchTerm);
   };
 
+  const handlePageSizeChange = (pageSize: number) => {
+    setPageSize(pageSize);
+  };
+
   useEffect(() => {
     const searchStr = searchKey.toString().toLowerCase();
 
@@ -68,14 +72,14 @@ function Users() {
   }, [searchKey]);
 
   useEffect(() => {
-    axios("https://dummyjson.com/users")
+    axios(`https://dummyjson.com/users?limit=${selectedPageSize}`)
       .then((usersResposnse) => {
         const usersResponseData = usersResposnse.data as IUsersResponse;
         setUsersData(usersResponseData.users);
         setFilteredData(usersResponseData.users);
       })
       .catch(console.log);
-  }, []);
+  }, [selectedPageSize]);
   return (
     <>
       <Table
@@ -83,6 +87,7 @@ function Users() {
         rowData={filteredData}
         keyMapper={keys}
         onSearchChange={handleSearch}
+        onPageSizeChange={handlePageSizeChange}
       />
     </>
   );
