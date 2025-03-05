@@ -10,4 +10,5 @@
 6. Add Pagination to Users Table
 7. Add Font Family
 8. Move interface to models
-9. Use Redux Toolkit
+9. React Router Implementation
+10. Products page implementation

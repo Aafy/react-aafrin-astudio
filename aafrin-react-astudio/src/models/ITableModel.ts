@@ -5,7 +5,6 @@ export interface PaginationProps {
   usersPerPage: number;
   totalUsers: number;
   paginate: (page: number) => void;
-
   forcePageNumber: number;
 }
 

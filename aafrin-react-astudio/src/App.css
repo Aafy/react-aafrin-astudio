@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+a.active {
+  background-color: #fdc936;
+}
 input {
   outline: auto;
   font-family: "NeutraText";

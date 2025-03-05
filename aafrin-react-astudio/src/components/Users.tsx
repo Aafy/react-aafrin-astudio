@@ -93,7 +93,7 @@ function Users() {
       .catch(console.log);
   }, [selectedPageSize, currentPage]);
   return (
-    <>
+    <div>
       <Table
         headers={headers}
         rowData={filteredData}
@@ -108,7 +108,7 @@ function Users() {
         paginate={handlePaginationClick}
         forcePageNumber={currentPage - 1}
       />
-    </>
+    </div>
   );
 }
 
