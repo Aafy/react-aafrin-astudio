@@ -84,8 +84,8 @@ function Users() {
     axios(
       `https://dummyjson.com/users?limit=${selectedPageSize}&skip=${skipCount}`
     )
-      .then((usersResposnse) => {
-        const usersResponseData = usersResposnse.data as IUsersResponse;
+      .then((usersResponse) => {
+        const usersResponseData = usersResponse.data as IUsersResponse;
         setUsersCount(usersResponseData.total);
         setUsersData(usersResponseData.users);
         setFilteredData(usersResponseData.users);

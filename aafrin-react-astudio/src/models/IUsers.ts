@@ -1,3 +1,5 @@
+import { IResponsePaginationProps } from "./ITableModel";
+
 export interface IUser {
   firstName: string;
   lastName: string;
@@ -14,9 +16,6 @@ export interface IUser {
   height: string;
 }
 
-export interface IUsersResponse {
+export interface IUsersResponse extends IResponsePaginationProps {
   users: IUser[];
-  limit: number;
-  skip: number;
-  total: number;
 }

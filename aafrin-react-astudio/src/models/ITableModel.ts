@@ -1,4 +1,5 @@
 import { ILabelKeyPair } from "./ILabelKeyPair";
+import { IProduct } from "./IProducts";
 import { IUser } from "./IUsers";
 
 export interface PaginationProps {
@@ -10,8 +11,14 @@ export interface PaginationProps {
 
 export interface TableProps {
   headers: ILabelKeyPair[];
-  rowData: IUser[];
+  rowData: IUser[] | IProduct[];
   keyMapper: string[];
   onSearchChange: (searchValue: string) => void;
   onPageSizeChange: (pageSize: number) => void;
+}
+
+export interface IResponsePaginationProps {
+  limit: number;
+  skip: number;
+  total: number;
 }

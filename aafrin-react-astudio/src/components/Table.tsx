@@ -4,7 +4,6 @@ import { TableProps } from "../models/ITableModel";
 
 function Table(props: TableProps) {
   const pageSizeOptions = [5, 10, 20, 50];
-
   const [showInput, setInputVisiblity] = useState(false);
   const [searchKey, setSearchKey] = useState("");
 
@@ -61,6 +60,9 @@ function Table(props: TableProps) {
 
       {showInput && (
         <input
+          autoFocus
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          type="text"
           placeholder="Search for ..."
           value={searchKey}
           onChange={handleInputChange}
@@ -87,7 +89,17 @@ function Table(props: TableProps) {
             <tr key={idx}>
               {props.keyMapper.map((columnName: string) => (
                 <td key={columnName}>
-                  {tuple[columnName] ? tuple[columnName] : "-"}
+                  {columnName === "thumbnail" ? (
+                    <img
+                      className="cell-image"
+                      src={tuple[columnName]}
+                      alt="Image"
+                    />
+                  ) : tuple[columnName] ? (
+                    tuple[columnName]
+                  ) : (
+                    "-"
+                  )}
                 </td>
               ))}
             </tr>

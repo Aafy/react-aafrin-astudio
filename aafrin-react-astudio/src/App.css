@@ -3,9 +3,17 @@
 a.active {
   background-color: #fdc936;
 }
+
+.cell-image {
+  width: 100px;
+  height: 80px;
+}
+
 input {
+  display: inline;
   outline: auto;
   font-family: "NeutraText";
+  width: 50%;
 }
 
 table {
