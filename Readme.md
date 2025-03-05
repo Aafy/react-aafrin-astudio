@@ -13,3 +13,4 @@
 9. React Router Implementation
 10. Products page implementation
 11. Reset Search
+12. Redux Toolkit Implementation

@@ -13,21 +13,28 @@ function Table(props: TableProps) {
     setSearchKey(event.target.value);
     props.onSearchChange(event.target.value as any);
   };
-  const handleSearchClick = () => {
-    setInputVisiblity(!showInput);
+
+  const resetFilters = () => {
     setSearchKey("");
     props.onSearchChange("");
+  };
+
+  const handleSearchClick = () => {
+    setInputVisiblity(!showInput);
+    resetFilters();
   };
 
   const handlePageSizeChange = (event: {
     target: { value: SetStateAction<string> };
   }) => {
     props.onPageSizeChange(Number(event.target.value));
-    handleSearchClick();
+    setInputVisiblity(false);
+    resetFilters();
   };
 
   useEffect(() => {
-    handleSearchClick();
+    setInputVisiblity(false);
+    resetFilters();
   }, [props.isPageNumbersClicked]);
 
   return (

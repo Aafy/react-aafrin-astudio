@@ -19,6 +19,7 @@ input {
   outline: auto;
   font-family: "NeutraText";
   width: 40%;
+  height: 30px;
 }
 
 table {

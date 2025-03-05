@@ -3,10 +3,16 @@ import { useEffect, useState } from "react";
 import Table from "./Table";
 import { IProduct, IProductsResponse } from "../models/IProducts";
 import Pagination from "./Pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { loadAllProducts } from "../state/ProductSlice";
 
 function Products() {
+  const getProductsDataStore = useSelector(
+    (state: any) => state.productStore?.products
+  );
+  const dispatch = useDispatch();
+
   const [productCount, setProductCount] = useState<number>(0);
-  const [productsData, setProductsData] = useState<IProduct[]>([]);
   const [filteredProductData, setFilteredProductData] = useState<IProduct[]>(
     []
   );
@@ -65,8 +71,8 @@ function Products() {
   useEffect(() => {
     const searchStr = searchProdKey.toString().toLowerCase();
 
-    const filteredResults = productsData.filter(
-      (product) =>
+    const filteredResults = getProductsDataStore.filter(
+      (product: IProduct) =>
         product.price.toString().includes(searchStr) ||
         product.rating.toString().includes(searchStr) ||
         product.minimumOrderQuantity.toString().includes(searchStr) ||
@@ -89,7 +95,7 @@ function Products() {
       .then((productsResponse) => {
         const productsResponseData = productsResponse.data as IProductsResponse;
         setProductCount(productsResponseData.total);
-        setProductsData(productsResponseData.products);
+        dispatch(loadAllProducts(productsResponseData.products));
         setFilteredProductData(productsResponseData.products);
       })
       .catch(console.log);

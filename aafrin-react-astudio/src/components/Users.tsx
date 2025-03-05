@@ -3,10 +3,15 @@ import { useEffect, useState } from "react";
 import { IUsersResponse, IUser } from "../models/IUsers";
 import Table from "./Table";
 import Pagination from "./Pagination";
+import { useSelector } from "react-redux";
+import { loadAllUsers } from "../state/UserSlice";
+import { useDispatch } from "react-redux";
 
 function Users() {
+  const usersDataStore = useSelector((state: any) => state.userStore.users);
+  const dispatch = useDispatch();
+
   const [userCount, setUsersCount] = useState<number>(0);
-  const [usersData, setUsersData] = useState<IUser[]>([]);
   const [filteredData, setFilteredData] = useState<IUser[]>([]);
   const [selectedPageSize, setPageSize] = useState<number>(5);
   const [currentPage, setCurrentPage] = useState<number>(1); // Current page
@@ -62,8 +67,8 @@ function Users() {
   useEffect(() => {
     const searchStr = searchKey.toString().toLowerCase();
 
-    const filteredResults = usersData.filter(
-      (user) =>
+    const filteredResults = usersDataStore.filter(
+      (user: IUser) =>
         user.age.toString().includes(searchStr) ||
         user.height.toString().includes(searchStr) ||
         user.firstName.toLowerCase().includes(searchStr) ||
@@ -87,7 +92,7 @@ function Users() {
       .then((usersResponse) => {
         const usersResponseData = usersResponse.data as IUsersResponse;
         setUsersCount(usersResponseData.total);
-        setUsersData(usersResponseData.users);
+        dispatch(loadAllUsers(usersResponseData.users));
         setFilteredData(usersResponseData.users);
       })
       .catch(console.log);
