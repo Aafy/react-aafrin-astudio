@@ -9,11 +9,16 @@ a.active {
   height: 80px;
 }
 
+.homePage,
+.pageNavigation {
+  font-family: "NeutraBold";
+}
+
 input {
   display: inline;
   outline: auto;
   font-family: "NeutraText";
-  width: 50%;
+  width: 40%;
 }
 
 table {

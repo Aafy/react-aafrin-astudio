@@ -12,3 +12,4 @@
 8. Move interface to models
 9. React Router Implementation
 10. Products page implementation
+11. Reset Search
