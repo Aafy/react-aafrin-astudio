@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { ILabelKeyPair } from "../models/ILabelKeyPair";
 import { TableProps } from "../models/ITableModel";
 
@@ -23,7 +23,12 @@ function Table(props: TableProps) {
     target: { value: SetStateAction<string> };
   }) => {
     props.onPageSizeChange(Number(event.target.value));
+    handleSearchClick();
   };
+
+  useEffect(() => {
+    handleSearchClick();
+  }, [props.isPageNumbersClicked]);
 
   return (
     <>

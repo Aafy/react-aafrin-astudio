@@ -100,6 +100,7 @@ function Products() {
         headers={headers}
         rowData={filteredProductData}
         keyMapper={keys}
+        isPageNumbersClicked={currentPage}
         onSearchChange={handleProductSearch}
         onPageSizeChange={handleProductPageSizeChange}
       />

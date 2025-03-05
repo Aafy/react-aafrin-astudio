@@ -13,6 +13,7 @@ export interface TableProps {
   headers: ILabelKeyPair[];
   rowData: IUser[] | IProduct[];
   keyMapper: string[];
+  isPageNumbersClicked: number;
   onSearchChange: (searchValue: string) => void;
   onPageSizeChange: (pageSize: number) => void;
 }

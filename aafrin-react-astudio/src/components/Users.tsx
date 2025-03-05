@@ -98,6 +98,7 @@ function Users() {
         headers={headers}
         rowData={filteredData}
         keyMapper={keys}
+        isPageNumbersClicked={currentPage}
         onSearchChange={handleSearch}
         onPageSizeChange={handlePageSizeChange}
       />
